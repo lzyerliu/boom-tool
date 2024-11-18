@@ -21,3 +21,5 @@ export {
   isServer,
   isClient
 } from './is';
+
+export { fileDownload } from './download';
