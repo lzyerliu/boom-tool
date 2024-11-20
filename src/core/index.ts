@@ -23,3 +23,4 @@ export {
 } from './is';
 
 export { fileDownload } from './download';
+export { uid } from './uid';

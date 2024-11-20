@@ -68,4 +68,59 @@ var isHTMLElement = function (val) {
 var isServer = typeof window === 'undefined';
 var isClient = !isServer;
 
-export { is, isArray, isBoolean, isClient, isDate, isDef, isElement, isEmpty, isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject, isPromise, isRegExp, isServer, isString, isUnDef, isWindow };
+/**
+ * file download
+ * @param data
+ * @param filename
+ * @param mine
+ * @param bom
+ */
+var fileDownload = function (data, filename, mine, bom) {
+    var bolbData = (typeof bom !== 'undefined') ? [bom, data] : [data];
+    var blob = new Blob(bolbData, { type: mine || 'application/octet-stream' });
+    // @ts-ignore
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        // IE workaround for "HTML7007: One or more blob URLs were
+        // revoked by closing the blob for which they were created.
+        // These URLs will no longer resolve as the data backing
+        // the URL has been freed."
+        // @ts-ignore
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+        var blobUrl_1 = (window.URL && window.URL.createObjectURL) ? window.URL.createObjectURL(blob) : window.webkitURL.createObjectURL(blob);
+        var a_1 = document.createElement('a');
+        a_1.style.display = 'none';
+        a_1.href = blobUrl_1;
+        a_1.setAttribute('download', filename);
+        // Safari thinks _blank anchor are pop ups. We only want to set _blank
+        // target if the browser does not support the HTML5 download attribute.
+        // This allows you to download files in desktop safari if pop up blocking
+        // is enabled.
+        if (typeof a_1.download === 'undefined') {
+            a_1.setAttribute('target', '_blank');
+        }
+        document.body.appendChild(a_1);
+        a_1.click();
+        var timer_1 = setTimeout(function () {
+            document.body.removeChild(a_1);
+            window.URL.revokeObjectURL(blobUrl_1);
+            clearTimeout(timer_1);
+        }, 500);
+    }
+};
+
+var IDX = 256, HEX = [], SIZE = 256, BUFFER;
+while (IDX--)
+    HEX[IDX] = (IDX + 256).toString(16).substring(1);
+var uid = function (len) {
+    var i = 0, tmp = (len || 11);
+    if (!BUFFER || ((IDX + tmp) > (SIZE * 2))) {
+        for (BUFFER = '', IDX = 0; i < SIZE; i++) {
+            BUFFER += HEX[Math.random() * 256 | 0];
+        }
+    }
+    return BUFFER.substring(IDX, IDX++ + tmp);
+};
+
+export { fileDownload, is, isArray, isBoolean, isClient, isDate, isDef, isElement, isEmpty, isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject, isPromise, isRegExp, isServer, isString, isUnDef, isWindow, uid };
