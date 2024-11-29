@@ -35,5 +35,8 @@
     "ts-jest": "^29.2.5",
     "tslib": "^2.8.1",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
   }
 }
