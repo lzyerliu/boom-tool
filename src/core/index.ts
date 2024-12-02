@@ -28,4 +28,6 @@ export { uid } from './uid';
 export { decimalCompute } from './math';
 export type { ComputeType, DecimalCompute } from './math';
 
-export { searchParams, concatParams } from './location'
+export { searchParams, concatParams } from './location';
+
+export { storageSession, storageLocal } from './storage';

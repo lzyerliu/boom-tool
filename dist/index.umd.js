@@ -145,6 +145,20 @@
     ***************************************************************************** */
     /* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
 
     function __spreadArray(to, from, pack) {
         if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
@@ -1170,7 +1184,7 @@
     }
 
     /**
-     * 获取 url 查询参数
+     * 获取 location.search/hash 查询参数
      * @param search
      * @param keys
      * @returns
@@ -1208,6 +1222,39 @@
         return url + query;
     };
 
+    // session storage
+    var SessionStorageProxy = /** @class */ (function () {
+        function SessionStorageProxy(storageModel) {
+            this.storage = storageModel;
+        }
+        // 设置缓存
+        SessionStorageProxy.prototype.setItem = function (key, value) {
+            this.storage.setItem(key, JSON.stringify(value));
+        };
+        // 获取缓存
+        SessionStorageProxy.prototype.getItem = function (key) {
+            return JSON.parse(this.storage.getItem(key));
+        };
+        // 移除缓存
+        SessionStorageProxy.prototype.removeItem = function (key) {
+            this.storage.removeItem(key);
+        };
+        // 清空缓存
+        SessionStorageProxy.prototype.clear = function () {
+            this.storage.clear();
+        };
+        return SessionStorageProxy;
+    }());
+    var LocalStorageProxy = /** @class */ (function (_super) {
+        __extends(LocalStorageProxy, _super);
+        function LocalStorageProxy() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return LocalStorageProxy;
+    }(SessionStorageProxy));
+    var storageSession = new SessionStorageProxy(sessionStorage);
+    var storageLocal = new LocalStorageProxy(localStorage);
+
     exports.concatParams = concatParams;
     exports.decimalCompute = decimalCompute;
     exports.fileDownload = fileDownload;
@@ -1232,6 +1279,8 @@
     exports.isUnDef = isUnDef;
     exports.isWindow = isWindow;
     exports.searchParams = searchParams;
+    exports.storageLocal = storageLocal;
+    exports.storageSession = storageSession;
     exports.uid = uid;
 
 }));
