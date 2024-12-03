@@ -22,9 +22,9 @@ export default [
         dir: 'dist',
         entryFileNames: '[name].cjs.js',
         sourcemap: false,
-        // plugins: [
-        //   terser()
-        // ]
+        plugins: [
+          terser()
+        ]
       },
       {
         format: 'esm',
