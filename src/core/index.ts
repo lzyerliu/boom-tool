@@ -17,9 +17,7 @@ export {
   isRegExp,
   isWindow,
   isElement,
-  isHTMLElement,
-  isServer,
-  isClient
+  isHTMLElement
 } from './is';
 
 export { fileDownload } from './download';

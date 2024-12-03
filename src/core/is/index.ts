@@ -86,8 +86,3 @@ export const isElement = (val: unknown): val is Element => {
 export const isHTMLElement = (val: unknown): val is HTMLElement => {
   return isObject(val) && 'accessKey' in val;
 }
-
-//
-export const isServer = typeof window === 'undefined';
-
-export const isClient = !isServer;

@@ -64,9 +64,6 @@ var isElement = function (val) {
 var isHTMLElement = function (val) {
     return isObject$1(val) && 'accessKey' in val;
 };
-//
-var isServer = typeof window === 'undefined';
-var isClient = !isServer;
 
 /**
  * file download
@@ -1249,4 +1246,4 @@ var LocalStorageProxy = /** @class */ (function (_super) {
 var storageSession = new SessionStorageProxy(sessionStorage);
 var storageLocal = new LocalStorageProxy(localStorage);
 
-export { concatParams, decimalCompute, fileDownload, is, isArray$1 as isArray, isBoolean, isClient, isDate, isDef, isElement, isEmpty, isFunction$1 as isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject$1 as isObject, isPromise, isRegExp, isServer, isString, isUnDef, isWindow, searchParams, storageLocal, storageSession, uid };
+export { concatParams, decimalCompute, fileDownload, is, isArray$1 as isArray, isBoolean, isDate, isDef, isElement, isEmpty, isFunction$1 as isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject$1 as isObject, isPromise, isRegExp, isString, isUnDef, isWindow, searchParams, storageLocal, storageSession, uid };

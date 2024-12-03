@@ -70,9 +70,6 @@
     var isHTMLElement = function (val) {
         return isObject$1(val) && 'accessKey' in val;
     };
-    //
-    var isServer = typeof window === 'undefined';
-    var isClient = !isServer;
 
     /**
      * file download
@@ -1261,7 +1258,6 @@
     exports.is = is;
     exports.isArray = isArray$1;
     exports.isBoolean = isBoolean;
-    exports.isClient = isClient;
     exports.isDate = isDate;
     exports.isDef = isDef;
     exports.isElement = isElement;
@@ -1274,7 +1270,6 @@
     exports.isObject = isObject$1;
     exports.isPromise = isPromise;
     exports.isRegExp = isRegExp;
-    exports.isServer = isServer;
     exports.isString = isString;
     exports.isUnDef = isUnDef;
     exports.isWindow = isWindow;
