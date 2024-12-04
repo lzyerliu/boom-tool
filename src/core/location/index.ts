@@ -31,9 +31,9 @@ const concatParams = (url: string, params: Record<string, any>, prefix: '?' | '#
   const keys = Object.keys(params);
   if (keys.length) {
     query = keys.reduce((str, k, i) => {
-      str += `${ i ? '&' : '' }${k}=${params[k]}`;
-      return str
-    }, prefix)
+      str += `${i ? '&' : ''}${k}=${params[k]}`;
+      return str;
+    }, prefix);
   }
   return url + query;
 }
