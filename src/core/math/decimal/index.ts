@@ -5,6 +5,12 @@ export type DecimalCompute = (type: ComputeType, ...args: number[]) => {
   next: DecimalCompute;
 }
 
+/**
+ * 计算
+ * @param type ComputeType
+ * @param args 0.1  0.2
+ * @returns 
+ */
 export const decimalCompute: DecimalCompute = (type, ...args) => {
 
   // 计算放大倍数

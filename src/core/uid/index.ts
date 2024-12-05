@@ -1,4 +1,9 @@
 
+/**
+ * uid 生成
+ * @param len 长度
+ * @returns 
+ */
 export const uid = (len: number) => {
   let IDX: number = 256, HEX: any[] = [], SIZE: number = 256, BUFFER: any;
   while (IDX--) HEX[IDX] = (IDX + 256).toString(16).substring(1);

@@ -3,8 +3,8 @@ import { flatMap } from 'lodash-es';
 /**
  * 获取 location.search/hash 查询参数
  * @param search ?k1=234&id=234234&k2=222 | k1=234&id=234234&k2=222
- * @param keys 
- * @returns 
+ * @param keys 'k1', 'id'
+ * @returns { k1: '234', id: '23423' }
  */
 const searchParams = (search: string, ...keys: string[]) => {
 
@@ -20,7 +20,8 @@ const searchParams = (search: string, ...keys: string[]) => {
 
 /**
  * 获取 url 查询参数
- * @param url 
+ * @param url https://www.baidu.com?key1=111&key2=222
+ * @returns { key1: '111', key2: '222' }
  */
 const getUrlParams = (url: string) => {
   let params: { [key: string]: any } = {};
@@ -36,10 +37,10 @@ const getUrlParams = (url: string) => {
 
 /**
  * url 拼接 params
- * @param url 
- * @param params 
- * @param prefix 
- * @returns 
+ * @param url 拼接的url； https://www.baidu.com
+ * @param params 拼接参数；{ key1: '111', key2: '222' }
+ * @param prefix 拼接字符； ?
+ * @returns https://www.baidu.com?key1=111&key2=222
  */
 const concatParams = (url: string, params: Record<string, any>, prefix: '?' | '#' = '?') => {
   let query = '';

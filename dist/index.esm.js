@@ -107,6 +107,11 @@ var fileDownload = function (data, filename, mine, bom) {
     }
 };
 
+/**
+ * uid 生成
+ * @param len 长度
+ * @returns
+ */
 var uid = function (len) {
     var IDX = 256, HEX = [], SIZE = 256, BUFFER;
     while (IDX--)
@@ -166,6 +171,12 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 
+/**
+ * 计算
+ * @param type ComputeType
+ * @param args 0.1  0.2
+ * @returns
+ */
 var decimalCompute = function (type) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -1177,8 +1188,8 @@ function flatMap(collection, iteratee) {
 /**
  * 获取 location.search/hash 查询参数
  * @param search ?k1=234&id=234234&k2=222 | k1=234&id=234234&k2=222
- * @param keys
- * @returns
+ * @param keys 'k1', 'id'
+ * @returns { k1: '234', id: '23423' }
  */
 var searchParams = function (search) {
     var keys = [];
@@ -1195,7 +1206,8 @@ var searchParams = function (search) {
 };
 /**
  * 获取 url 查询参数
- * @param url
+ * @param url https://www.baidu.com?key1=111&key2=222
+ * @returns { key1: '111', key2: '222' }
  */
 var getUrlParams = function (url) {
     var params = {};
@@ -1208,10 +1220,10 @@ var getUrlParams = function (url) {
 };
 /**
  * url 拼接 params
- * @param url
- * @param params
- * @param prefix
- * @returns
+ * @param url 拼接的url； https://www.baidu.com
+ * @param params 拼接参数；{ key1: '111', key2: '222' }
+ * @param prefix 拼接字符； ?
+ * @returns https://www.baidu.com?key1=111&key2=222
  */
 var concatParams = function (url, params, prefix) {
     if (prefix === void 0) { prefix = '?'; }
