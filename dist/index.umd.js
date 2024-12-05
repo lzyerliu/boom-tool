@@ -1182,7 +1182,7 @@
 
     /**
      * 获取 location.search/hash 查询参数
-     * @param search
+     * @param search ?k1=234&id=234234&k2=222 | k1=234&id=234234&k2=222
      * @param keys
      * @returns
      */
@@ -1198,6 +1198,19 @@
             prev[key] = params.get(key);
             return prev;
         }, {});
+    };
+    /**
+     * 获取 url 查询参数
+     * @param url
+     */
+    var getUrlParams = function (url) {
+        var params = {};
+        url.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+        // @ts-ignore
+        function (m, key, value) {
+            params[key] = value;
+        });
+        return params;
     };
     /**
      * url 拼接 params
@@ -1255,6 +1268,7 @@
     exports.concatParams = concatParams;
     exports.decimalCompute = decimalCompute;
     exports.fileDownload = fileDownload;
+    exports.getUrlParams = getUrlParams;
     exports.is = is;
     exports.isArray = isArray$1;
     exports.isBoolean = isBoolean;

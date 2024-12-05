@@ -2,7 +2,7 @@ import { flatMap } from 'lodash-es';
 
 /**
  * 获取 location.search/hash 查询参数
- * @param search 
+ * @param search ?k1=234&id=234234&k2=222 | k1=234&id=234234&k2=222
  * @param keys 
  * @returns 
  */
@@ -16,6 +16,21 @@ const searchParams = (search: string, ...keys: string[]) => {
     prev[key] = params.get(key);
     return prev;
   }, {});
+}
+
+/**
+ * 获取 url 查询参数
+ * @param url 
+ */
+const getUrlParams = (url: string) => {
+  let params: { [key: string]: any } = {};
+  url.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+    // @ts-ignore
+    (m: any, key: string, value: string) => {
+      params[key] = <string>value;
+    }
+  );
+  return params;
 }
 
 
@@ -40,5 +55,6 @@ const concatParams = (url: string, params: Record<string, any>, prefix: '?' | '#
 
 export {
   searchParams,
+  getUrlParams,
   concatParams
 }

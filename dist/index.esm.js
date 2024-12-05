@@ -1176,7 +1176,7 @@ function flatMap(collection, iteratee) {
 
 /**
  * 获取 location.search/hash 查询参数
- * @param search
+ * @param search ?k1=234&id=234234&k2=222 | k1=234&id=234234&k2=222
  * @param keys
  * @returns
  */
@@ -1192,6 +1192,19 @@ var searchParams = function (search) {
         prev[key] = params.get(key);
         return prev;
     }, {});
+};
+/**
+ * 获取 url 查询参数
+ * @param url
+ */
+var getUrlParams = function (url) {
+    var params = {};
+    url.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+    // @ts-ignore
+    function (m, key, value) {
+        params[key] = value;
+    });
+    return params;
 };
 /**
  * url 拼接 params
@@ -1246,4 +1259,4 @@ var LocalStorageProxy = /** @class */ (function (_super) {
 var storageSession = new SessionStorageProxy(sessionStorage);
 var storageLocal = new LocalStorageProxy(localStorage);
 
-export { concatParams, decimalCompute, fileDownload, is, isArray$1 as isArray, isBoolean, isDate, isDef, isElement, isEmpty, isFunction$1 as isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject$1 as isObject, isPromise, isRegExp, isString, isUnDef, isWindow, searchParams, storageLocal, storageSession, uid };
+export { concatParams, decimalCompute, fileDownload, getUrlParams, is, isArray$1 as isArray, isBoolean, isDate, isDef, isElement, isEmpty, isFunction$1 as isFunction, isHTMLElement, isNull, isNullOrUnDef, isNumber, isObject$1 as isObject, isPromise, isRegExp, isString, isUnDef, isWindow, searchParams, storageLocal, storageSession, uid };
